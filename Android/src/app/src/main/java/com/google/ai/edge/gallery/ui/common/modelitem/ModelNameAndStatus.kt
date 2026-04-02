@@ -106,6 +106,9 @@ fun ModelNameAndStatus(
 
     // Status icon + size + download progress details.
     var showDownloadStatusUI = true
+    if (model.runtimeType == RuntimeType.AICORE) {
+      showDownloadStatusUI = false
+    }
 
     if (showDownloadStatusUI) {
       Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(top = 4.dp)) {

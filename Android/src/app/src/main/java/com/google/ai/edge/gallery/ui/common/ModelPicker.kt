@@ -120,6 +120,9 @@ fun ModelPicker(
             style = MaterialTheme.typography.bodyMedium,
           )
           var showStatusIconAndSize = true
+          if (model.runtimeType == RuntimeType.AICORE) {
+            showStatusIconAndSize = false
+          }
 
           if (showStatusIconAndSize) {
             Row(
