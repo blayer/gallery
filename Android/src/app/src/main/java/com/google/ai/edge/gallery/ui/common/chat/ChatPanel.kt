@@ -292,7 +292,8 @@ fun ChatPanel(
               if (
                 message.type !== ChatMessageType.LOADING &&
                   message.type !== ChatMessageType.WEBVIEW &&
-                  message.type !== ChatMessageType.COLLAPSABLE_PROGRESS_PANEL
+                  message.type !== ChatMessageType.COLLAPSABLE_PROGRESS_PANEL &&
+                  message.type !== ChatMessageType.ORCHESTRATION_LOG
               ) {
                 extraPaddingEnd = 48.dp
               }
@@ -436,6 +437,18 @@ fun ChatPanel(
                           thinkingText = message.content,
                           inProgress = message.inProgress,
                         )
+
+                      // Orchestration plan
+                      is ChatMessageOrchestrationPlan ->
+                        MessageBodyOrchestrationPlan(message = message)
+
+                      // Orchestration evaluation
+                      is ChatMessageOrchestrationEvaluation ->
+                        MessageBodyOrchestrationEvaluation(message = message)
+
+                      // Orchestration log (consolidated bubble)
+                      is ChatMessageOrchestrationLog ->
+                        MessageBodyOrchestrationLog(message = message)
 
                       else -> {}
                     }
